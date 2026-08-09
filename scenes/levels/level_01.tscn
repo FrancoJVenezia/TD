@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://d4loi6g52pa58"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_445s5"]
+albedo_color = Color(0.5, 0.5, 0.5, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_hhfpc"]
+material = SubResource("StandardMaterial3D_445s5")
+size = Vector2(40, 40)
+
+[sub_resource type="Curve3D" id="Curve3D_j28rk"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -0.129, 0, -11.929, 0, 0, 0, 0, 0, 0, 0.003, 0, -6.835, 0, 0, 0, 0, 0, 0, 1.402, 0, -5.343, 0, 0, 0, 0, 0, 0, 3.61, 0, -3.823, 0, 0, 0, 0, 0, 0, 4.249, 0, -1.901, 0, 0, 0, 0, 0, 0, 2.378, 0, -0.511, 0, 0, 0, 0, 0, 0, -1.8034663, 0.53073883, -0.17600441, 0, 0, 0, 0, 0, 0, -4.523, 0, -1.428, 0, 0, 0, 0, 0, 0, -6.549, 0, 0.028, 0, 0, 0, 0, 0, 0, -8.98, 0, 3.27, 0, 0, 0, 0, 0, 0, -8.589, 0, 4.306, 0, 0, 0, 0, 0, 0, -6.619, 0, 5.519, 0, 0, 0, 0, 0, 0, -4.139, 0, 4.755, 0, 0, 0, 0, 0, 0, 0.618, 0, 3.444, 0, 0, 0, 0, 0, 0, 0.199, 0, 4.989, 0, 0, 0, 0, 0, 0, -0.135, 0, 8.281, 0, 0, 0, 0, 0, 0, -0.25, 0, 10.729),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 17
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hhfpc"]
+albedo_color = Color(0, 0.24269372, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hhfpc"]
+material = SubResource("StandardMaterial3D_hhfpc")
+
+[node name="Level" type="Node3D" unique_id=232167914]
+
+[node name="Ground" type="MeshInstance3D" parent="." unique_id=1927618447]
+mesh = SubResource("PlaneMesh_hhfpc")
+
+[node name="EnemyPath" type="Path3D" parent="." unique_id=490095465]
+curve = SubResource("Curve3D_j28rk")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="EnemyPath" unique_id=39265337]
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_rotation_accurate = false
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+
+[node name="BuildSlots" type="Node3D" parent="." unique_id=1626863752]
+
+[node name="Base" type="Node3D" parent="." unique_id=105432654]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7810383, 0.5, 11.108313)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Base" unique_id=1939963559]
+mesh = SubResource("BoxMesh_hhfpc")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1560081076]
+transform = Transform3D(1, 0, 0, 0, 0.57357645, 0.81915206, 0, -0.81915206, 0.57357645, 0, 20, 14)
+projection = 1
+current = true
+size = 20.0
