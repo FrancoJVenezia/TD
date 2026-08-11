@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://d4loi6g52pa58"]
 
+[ext_resource type="Script" uid="uid://bvuohwbd3dfas" path="res://scenes/levels/node.gd" id="1_m802k"]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_445s5"]
 albedo_color = Color(0.5, 0.5, 0.5, 1)
 
@@ -54,3 +56,6 @@ transform = Transform3D(1, 0, 0, 0, 0.57357645, 0.81915206, 0, -0.81915206, 0.57
 projection = 1
 current = true
 size = 20.0
+
+[node name="Node" type="Node" parent="." unique_id=1474473017]
+script = ExtResource("1_m802k")
