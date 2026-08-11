@@ -1,11 +1,18 @@
 extends Node
 
+# --- Combate ---
+signal enemy_died(enemy, killer_tags: Array)
+signal enemy_reached_base(enemy)
+signal base_damaged(current: float, max_hp: float)
+signal base_destroyed()
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+# --- Economía ---
+signal balance_changed(currency: StringName, value: int)
 
+# --- Oleadas ---
+signal wave_started(index: int)
+signal wave_cleared(index: int)
+signal all_waves_cleared()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+# --- Juego ---
+signal game_state_changed(from: int, to: int)

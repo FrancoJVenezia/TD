@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://d4loi6g52pa58"]
 
 [ext_resource type="Script" uid="uid://bvuohwbd3dfas" path="res://scenes/levels/node.gd" id="1_m802k"]
+[ext_resource type="Script" uid="uid://dg0rkbank5xog" path="res://scenes/levels/yo_emito_la_muerte_de_un_enemigo.gd" id="2_2djvx"]
+[ext_resource type="Script" uid="uid://6rcu78h21tls" path="res://scenes/levels/yo_la_recibo.gd" id="3_uvc87"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_445s5"]
 albedo_color = Color(0.5, 0.5, 0.5, 1)
@@ -59,3 +61,9 @@ size = 20.0
 
 [node name="Node" type="Node" parent="." unique_id=1474473017]
 script = ExtResource("1_m802k")
+
+[node name="Yo emito la muerte de un enemigo" type="Node" parent="." unique_id=220988192]
+script = ExtResource("2_2djvx")
+
+[node name="Yo la recibo" type="Node" parent="." unique_id=218554676]
+script = ExtResource("3_uvc87")
