@@ -7,7 +7,8 @@ var speed: float = 3.0        # en F1 pasa a ser stats.get_stat(MOVE_SPEED)
 func setup(enemy_data: EnemyData) -> void:
 	data = enemy_data
 	speed = data.move_speed
-	health.max_health = data.max_health
+	health.armor = data.armor
+	health.set_max_health(data.max_health, false)
 	health.died.connect(_on_died)
 	var m := data.model_scene.instantiate()
 	$Model.add_child(m)

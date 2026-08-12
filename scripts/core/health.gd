@@ -5,6 +5,7 @@ signal healed(amount: float, current: float)
 signal died()
 
 @export var max_health: float = 100.0
+@export var armor: float = 0.0 
 var current: float
 
 func _ready() -> void:
@@ -13,7 +14,7 @@ func _ready() -> void:
 func take_damage(info: DamageInfo) -> void:
 	if current <= 0.0:
 		return
-	var amount = max(1.0, info.amount)
+	var amount = max(1.0, info.amount - armor)
 	current = max(0.0, current - amount)
 	damaged.emit(amount, current)
 	
