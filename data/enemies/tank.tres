@@ -4,4 +4,8 @@
 
 [resource]
 script = ExtResource("1_wrwnl")
+max_health = 400.0
+move_speed = 1.5
+armor = 3.0
+gold_reward = 25
 metadata/_custom_type_script = "uid://dx3ia0oobvi50"

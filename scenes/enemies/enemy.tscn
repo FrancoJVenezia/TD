@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://dcrlrjiiupykg"]
+
+[ext_resource type="Script" uid="uid://cqfe5hhurm5u1" path="res://scripts/enemy.gd" id="1_6xk8f"]
+[ext_resource type="Script" uid="uid://uvegd81h83w7" path="res://scripts/core/health.gd" id="2_8e3ao"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hhfpc"]
+
+[node name="Enemy" type="PathFollow3D" unique_id=1505992191]
+rotation_mode = 1
+loop = false
+script = ExtResource("1_6xk8f")
+
+[node name="Model" type="Node3D" parent="." unique_id=1436908171]
+
+[node name="Health" type="Node" parent="." unique_id=1869921119]
+script = ExtResource("2_8e3ao")
+metadata/_custom_type_script = "uid://uvegd81h83w7"
+
+[node name="Hitbox" type="Area3D" parent="." unique_id=210523364]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" unique_id=1752340363]
+shape = SubResource("SphereShape3D_hhfpc")

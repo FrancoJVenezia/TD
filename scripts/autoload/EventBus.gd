@@ -2,7 +2,7 @@ extends Node
 
 # --- Combate ---
 signal enemy_died(enemy, killer_tags: Array)
-signal enemy_reached_base(enemy)
+signal enemy_reached_base(enemy: Enemy)
 signal base_damaged(current: float, max_hp: float)
 signal base_destroyed()
 
