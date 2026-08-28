@@ -1,10 +1,7 @@
 [gd_scene format=3 uid="uid://d4loi6g52pa58"]
 
-[ext_resource type="Script" uid="uid://bvuohwbd3dfas" path="res://scenes/levels/node.gd" id="1_m802k"]
 [ext_resource type="Script" uid="uid://cw0udg76a0wmr" path="res://scripts/level.gd" id="1_qdh5e"]
-[ext_resource type="Script" uid="uid://dg0rkbank5xog" path="res://scenes/levels/yo_emito_la_muerte_de_un_enemigo.gd" id="2_2djvx"]
 [ext_resource type="Script" uid="uid://uvegd81h83w7" path="res://scripts/core/health.gd" id="2_50wog"]
-[ext_resource type="Script" uid="uid://6rcu78h21tls" path="res://scenes/levels/yo_la_recibo.gd" id="3_uvc87"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_445s5"]
 albedo_color = Color(0.5, 0.5, 0.5, 1)
@@ -67,15 +64,6 @@ transform = Transform3D(1, 0, 0, 0, 0.57357645, 0.81915206, 0, -0.81915206, 0.57
 projection = 1
 current = true
 size = 20.0
-
-[node name="Node" type="Node" parent="." unique_id=27804183]
-script = ExtResource("1_m802k")
-
-[node name="Yo emito la muerte de un enemigo" type="Node" parent="." unique_id=1101023469]
-script = ExtResource("2_2djvx")
-
-[node name="Yo la recibo" type="Node" parent="." unique_id=669116119]
-script = ExtResource("3_uvc87")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1148633958]
 transform = Transform3D(3.7613084e-08, 0.06975647, 0.9975641, 8.720982e-08, -0.9975641, 0.06975647, 1, 8.4373625e-08, -4.360491e-08, 21.909271, 5.025377, 4.213917)
