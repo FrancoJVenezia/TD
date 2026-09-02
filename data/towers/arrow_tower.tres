@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="TowerData" format=3 uid="uid://8ob87kuhgajj"]
+
+[ext_resource type="Script" uid="uid://dt72dbp1aaakv" path="res://scripts/data/tower_data.gd" id="1_txfb2"]
+[ext_resource type="Script" uid="uid://dmgecbv0uons2" path="res://scripts/data/tower_level_data.gd" id="2_4nijk"]
+
+[sub_resource type="Resource" id="Resource_k4h11"]
+script = ExtResource("2_4nijk")
+metadata/_custom_type_script = "uid://dmgecbv0uons2"
+
+[sub_resource type="Resource" id="Resource_x7re5"]
+script = ExtResource("2_4nijk")
+cost = 90
+metadata/_custom_type_script = "uid://dmgecbv0uons2"
+
+[resource]
+script = ExtResource("1_txfb2")
+upgrade_levels = Array[ExtResource("2_4nijk")]([SubResource("Resource_k4h11"), SubResource("Resource_x7re5")])
+metadata/_custom_type_script = "uid://dt72dbp1aaakv"
