@@ -1,0 +1,7 @@
+# Config de Codex para este proyecto (solo carga porque el proyecto está marcado como trusted).
+# godot-ai no va acá: lo configura su dock en Godot con «Configure».
+
+[mcp_servers.godot]
+command = "npx.cmd"
+args = ["-y", "@coding-solo/godot-mcp@0.1.1"]
+env = { GODOT_PATH = 'F:\Steam\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe' }
