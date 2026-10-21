@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ci4501adc61vj"]
 
-[ext_resource type="Script" path="res://scripts/tower.gd" id="1_tower"]
+[ext_resource type="Script" uid="uid://cdooa3j2bg1v" path="res://scripts/tower.gd" id="1_tower"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_range"]
 radius = 1.0
