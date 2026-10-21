@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://ci4501adc61vj"]
+
+[node name="Tower" type="Node3D" unique_id=1079095775]
+
+[node name="Model" type="Node3D" parent="." unique_id=1267161234]
+
+[node name="Muzzle" type="Marker3D" parent="." unique_id=602740481]
+
+[node name="RangeArea" type="Area3D" parent="." unique_id=543207874]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RangeArea" unique_id=2127336742]

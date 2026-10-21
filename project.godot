@@ -21,6 +21,7 @@ EventBus="*uid://ds4ia6avqfw64"
 Wallet="*uid://ykaul4oxbo6k"
 MetaProgress="*uid://djt7vj4ywvohh"
 GameState="*uid://covteyfhkbruj"
+_mcp_game_helper="*res://addons/godot_ai/runtime/game_helper.gd"
 
 [display]
 
