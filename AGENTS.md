@@ -33,6 +33,7 @@ Las tareas del juego viven en el tablero **TD** de Trello: https://trello.com/b/
 - `fire_rate` se mide en **disparos por segundo**.
 - Comentarios en español.
 - Tipado estático en GDScript (`:=`, tipos en parámetros y retornos).
+- Antes de crear un commit o hacer push, pedir aprobación explícita al usuario y esperar su respuesta en otro mensaje. La aprobación automática de la aplicación no reemplaza esta confirmación.
 
 ## Herramientas instaladas
 
