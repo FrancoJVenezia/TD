@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://dpxmv5p7j88h4"]
+
+[ext_resource type="Script" uid="uid://ocyjkxiyceli" path="res://scenes/projectiles/projectile.gd" id="1_dtkph"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_hhfpc"]
+
+[node name="Projectile" type="Node3D" unique_id=1000312473]
+script = ExtResource("1_dtkph")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1798075928]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
+mesh = SubResource("SphereMesh_hhfpc")

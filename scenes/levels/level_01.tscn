@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cw0udg76a0wmr" path="res://scripts/level.gd" id="1_qdh5e"]
 [ext_resource type="Script" uid="uid://uvegd81h83w7" path="res://scripts/core/health.gd" id="2_50wog"]
+[ext_resource type="PackedScene" uid="uid://ci4501adc61vj" path="res://scenes/towers/tower.tscn" id="3_2djvx"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_445s5"]
 albedo_color = Color(0.5, 0.5, 0.5, 1)
@@ -26,6 +27,11 @@ material = SubResource("StandardMaterial3D_hhfpc")
 [node name="Level_01" type="Node3D" unique_id=683390276]
 script = ExtResource("1_qdh5e")
 metadata/_custom_type_script = "uid://cw0udg76a0wmr"
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=379091844]
+transform = Transform3D(-0.2537579, -0.39804456, 0.881571, 0, 0.9114033, 0.41151434, -0.96726775, 0.10442501, -0.23127578, 0, 0, 0)
+light_color = Color(1, 1, 0.81352156, 1)
+shadow_enabled = true
 
 [node name="Ground" type="MeshInstance3D" parent="." unique_id=51724355]
 mesh = SubResource("PlaneMesh_50wog")
@@ -65,5 +71,7 @@ projection = 1
 current = true
 size = 20.0
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1148633958]
-transform = Transform3D(3.7613084e-08, 0.06975647, 0.9975641, 8.720982e-08, -0.9975641, 0.06975647, 1, 8.4373625e-08, -4.360491e-08, 21.909271, 5.025377, 4.213917)
+[node name="Projectiles Root" type="Node3D" parent="." unique_id=2095388487]
+
+[node name="Tower" parent="." unique_id=1079095775 instance=ExtResource("3_2djvx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65396595, 2.3932714)

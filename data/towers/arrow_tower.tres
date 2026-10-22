@@ -1,7 +1,10 @@
 [gd_resource type="Resource" script_class="TowerData" format=3 uid="uid://8ob87kuhgajj"]
 
+[ext_resource type="Texture2D" uid="uid://cbc6bpwayfnn1" path="res://icon.svg" id="1_nxigd"]
 [ext_resource type="Script" uid="uid://dt72dbp1aaakv" path="res://scripts/data/tower_data.gd" id="1_txfb2"]
 [ext_resource type="Script" uid="uid://dmgecbv0uons2" path="res://scripts/data/tower_level_data.gd" id="2_4nijk"]
+[ext_resource type="PackedScene" uid="uid://bjsit1a70x2q" path="res://esfera.tscn" id="2_oitiq"]
+[ext_resource type="PackedScene" uid="uid://dpxmv5p7j88h4" path="res://scenes/projectiles/projectile.tscn" id="3_c4pgp"]
 
 [sub_resource type="Resource" id="Resource_k4h11"]
 script = ExtResource("2_4nijk")
@@ -14,5 +17,9 @@ metadata/_custom_type_script = "uid://dmgecbv0uons2"
 
 [resource]
 script = ExtResource("1_txfb2")
+damage = 60.0
 upgrade_levels = Array[ExtResource("2_4nijk")]([SubResource("Resource_k4h11"), SubResource("Resource_x7re5")])
+model_scene = ExtResource("2_oitiq")
+projectile_scene = ExtResource("3_c4pgp")
+icon = ExtResource("1_nxigd")
 metadata/_custom_type_script = "uid://dt72dbp1aaakv"

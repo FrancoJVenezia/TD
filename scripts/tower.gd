@@ -7,6 +7,7 @@ var _current_target: Enemy
 
 @onready var _range_area: Area3D = $RangeArea
 @onready var _range_shape: CollisionShape3D = $RangeArea/CollisionShape3D
+@onready var projectiles_root: Node3D = $"../Projectiles Root"
 
 
 func _ready() -> void:
@@ -81,6 +82,11 @@ func _on_range_area_entered(area: Area3D) -> void:
 	if not enemy.tree_exiting.is_connected(exit_callback):
 		enemy.tree_exiting.connect(exit_callback, CONNECT_ONE_SHOT)
 	print("Torre: enemigo entró en rango (%d)." % _in_range.size())
+	shot_once()
+	await get_tree().create_timer(1.0).timeout
+	shot_once()
+	await get_tree().create_timer(1.0).timeout
+	shot_once()
 
 
 func _on_range_area_exited(area: Area3D) -> void:
@@ -111,3 +117,18 @@ func _prune_invalid_enemies() -> void:
 			if _current_target == _in_range[index]:
 				_current_target = null
 			_in_range.remove_at(index)
+
+func shot_once() -> void:
+	var target := get_target_for_shot()
+	if target == null:
+		return
+	if data.projectile_scene == null:
+		push_error("TowerData no tiene una escena de proyectil asignada.")
+		return
+	var projectile = data.projectile_scene.instantiate()
+	var damage_info := DamageInfo.new()
+	damage_info.amount = data.damage
+	damage_info.splash_radius = data.splash_radius
+	projectiles_root.add_child(projectile)
+	projectile.global_position = $Muzzle.global_position
+	projectile.setup(target, stats.get_stat(StatId.PROJECTILE_SPEED), damage_info)

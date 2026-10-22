@@ -2,6 +2,7 @@ class_name Level extends Node3D
 
 
 const ENEMY = preload("uid://dcrlrjiiupykg")
+@onready var tower: Tower = $Tower
 
 @onready var enemy_path: Path3D = $EnemyPath
 @onready var base: Node3D = $Base
@@ -16,6 +17,7 @@ func _ready() -> void:
 	$EnemyPath.add_child(e)     # ⚠️ hijo del Path3D, NO del Level
 	e.setup(load("res://data/enemies/grunt.tres"))
 	e.progress = 0.0
+	tower.setup(load("res://data/towers/arrow_tower.tres"))
 	print('Vida actual: ', health.current)
 
 
