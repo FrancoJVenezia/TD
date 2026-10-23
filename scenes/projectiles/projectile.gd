@@ -1,4 +1,4 @@
-extends Node3D
+class_name Projectile extends Node3D
 
 const HIT_DISTANCE := 0.4
 

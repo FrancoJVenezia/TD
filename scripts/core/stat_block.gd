@@ -50,6 +50,9 @@ func has_source(source: StringName) -> bool:
 	return false
 
 func tick(delta: float) -> void:
+	if _mods.is_empty():
+		return
+
 	var expired: Array[int] = []
 	for i in range(_mods.size() - 1, -1, -1):
 		if _mods[i].advance(delta):

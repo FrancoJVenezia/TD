@@ -17,7 +17,6 @@ metadata/_custom_type_script = "uid://dmgecbv0uons2"
 
 [resource]
 script = ExtResource("1_txfb2")
-damage = 60.0
 upgrade_levels = Array[ExtResource("2_4nijk")]([SubResource("Resource_k4h11"), SubResource("Resource_x7re5")])
 model_scene = ExtResource("2_oitiq")
 projectile_scene = ExtResource("3_c4pgp")

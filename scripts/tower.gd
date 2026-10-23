@@ -1,13 +1,18 @@
 class_name Tower extends Node3D
 
+const MODIFIER_TICK_INTERVAL: float = 0.1
+
 var data: TowerData
 var stats := StatBlock.new()
 var _in_range: Array[Enemy] = []
 var _current_target: Enemy
+var _cooldown: float = 0.0
+var _modifier_tick_elapsed: float = 0.0
 
+@onready var _model: Node3D = $Model
 @onready var _range_area: Area3D = $RangeArea
 @onready var _range_shape: CollisionShape3D = $RangeArea/CollisionShape3D
-@onready var projectiles_root: Node3D = $"../Projectiles Root"
+@onready var _projectiles_root: Node3D = $"../Projectiles Root"
 
 
 func _ready() -> void:
@@ -20,6 +25,27 @@ func _ready() -> void:
 		_refresh_range()
 
 
+func _physics_process(delta: float) -> void:
+	_modifier_tick_elapsed += delta
+	while _modifier_tick_elapsed >= MODIFIER_TICK_INTERVAL:
+		stats.tick(MODIFIER_TICK_INTERVAL)
+		_modifier_tick_elapsed -= MODIFIER_TICK_INTERVAL
+	_cooldown -= delta
+	_validate_target()
+
+	if _current_target == null:
+		if data == null:
+			return
+		_current_target = Targeting.pick(_in_range, data.target_mode, global_position)
+	if _current_target == null:
+		return
+
+	_aim_at(_current_target)
+	if _cooldown <= 0.0:
+		_fire()
+		_cooldown = 1.0 / maxf(0.05, stats.get_stat(StatId.FIRE_RATE))
+
+
 func setup(tower_data: TowerData) -> void:
 	data = tower_data
 	stats.set_base(StatId.DAMAGE, data.damage)
@@ -28,36 +54,60 @@ func setup(tower_data: TowerData) -> void:
 	stats.set_base(StatId.PROJECTILE_SPEED, data.projectile_speed)
 
 	if data.model_scene != null:
-		$Model.add_child(data.model_scene.instantiate())
+		_model.add_child(data.model_scene.instantiate())
 	if is_node_ready():
 		_refresh_range()
 
 
-func get_enemies_in_range() -> Array[Enemy]:
-	_prune_invalid_enemies()
-	return _in_range.duplicate()
-
-
-## Se elige al pedir un disparo, no cada frame. La caché evita repetir una
-## búsqueda si el sistema de ataque consulta más de una vez durante el mismo disparo.
-func get_target_for_shot() -> Enemy:
-	_prune_invalid_enemies()
-	if _is_target_valid(_current_target):
-		return _current_target
-	if data == null:
+func _validate_target() -> void:
+	if _current_target != null and not _is_target_valid(_current_target):
 		_current_target = null
-		return null
-	_current_target = Targeting.pick(_in_range, data.target_mode, global_position)
-	return _current_target
-
-
-func notify_shot_fired() -> void:
-	_current_target = null
 
 
 func _is_target_valid(enemy: Enemy) -> bool:
-	return is_instance_valid(enemy) and enemy.is_inside_tree() and _in_range.has(enemy) \
-		and is_instance_valid(enemy.health) and enemy.health.is_alive()
+	return is_instance_valid(enemy) and enemy.is_inside_tree() \
+		and _in_range.has(enemy) and is_instance_valid(enemy.health) \
+		and enemy.health.is_alive()
+
+
+func _aim_at(enemy: Enemy) -> void:
+	var flat_target := Vector3(
+		enemy.global_position.x,
+		_model.global_position.y,
+		enemy.global_position.z
+	)
+	if not _model.global_position.is_equal_approx(flat_target):
+		_model.look_at(flat_target, Vector3.UP)
+
+
+func _fire() -> void:
+	if data == null:
+		return
+	var info := _build_damage()
+	match data.delivery:
+		TowerData.Delivery.PROJECTILE:
+			if data.projectile_scene == null:
+				push_error("TowerData no tiene una escena de proyectil asignada.")
+				return
+			var projectile := data.projectile_scene.instantiate() as Projectile
+			if projectile == null:
+				push_error("La escena de proyectil no tiene un nodo raíz Projectile.")
+				return
+			_projectiles_root.add_child(projectile)
+			projectile.global_position = $Muzzle.global_position
+			projectile.setup(_current_target, stats.get_stat(StatId.PROJECTILE_SPEED), info)
+		TowerData.Delivery.INSTANT:
+			pass # F4
+		TowerData.Delivery.AREA_PULSE:
+			pass # F4
+
+
+func _build_damage() -> DamageInfo:
+	var info := DamageInfo.new()
+	info.amount = stats.get_stat(StatId.DAMAGE)
+	info.source_tags = data.tags
+	info.splash_radius = data.splash_radius
+	return info
 
 
 func _refresh_range() -> void:
@@ -81,12 +131,6 @@ func _on_range_area_entered(area: Area3D) -> void:
 	var exit_callback := _on_enemy_tree_exiting.bind(enemy)
 	if not enemy.tree_exiting.is_connected(exit_callback):
 		enemy.tree_exiting.connect(exit_callback, CONNECT_ONE_SHOT)
-	print("Torre: enemigo entró en rango (%d)." % _in_range.size())
-	shot_once()
-	await get_tree().create_timer(1.0).timeout
-	shot_once()
-	await get_tree().create_timer(1.0).timeout
-	shot_once()
 
 
 func _on_range_area_exited(area: Area3D) -> void:
@@ -98,7 +142,6 @@ func _on_range_area_exited(area: Area3D) -> void:
 		_in_range.erase(enemy)
 		if _current_target == enemy:
 			_current_target = null
-		print("Torre: enemigo salió de rango (%d)." % _in_range.size())
 
 
 func _on_enemy_tree_exiting(enemy: Enemy) -> void:
@@ -113,22 +156,8 @@ func _enemy_from_area(area: Area3D) -> Enemy:
 
 func _prune_invalid_enemies() -> void:
 	for index in range(_in_range.size() - 1, -1, -1):
-		if not is_instance_valid(_in_range[index]) or not _in_range[index].is_inside_tree():
-			if _current_target == _in_range[index]:
+		var enemy := _in_range[index]
+		if not is_instance_valid(enemy) or not enemy.is_inside_tree():
+			if _current_target == enemy:
 				_current_target = null
 			_in_range.remove_at(index)
-
-func shot_once() -> void:
-	var target := get_target_for_shot()
-	if target == null:
-		return
-	if data.projectile_scene == null:
-		push_error("TowerData no tiene una escena de proyectil asignada.")
-		return
-	var projectile = data.projectile_scene.instantiate()
-	var damage_info := DamageInfo.new()
-	damage_info.amount = data.damage
-	damage_info.splash_radius = data.splash_radius
-	projectiles_root.add_child(projectile)
-	projectile.global_position = $Muzzle.global_position
-	projectile.setup(target, stats.get_stat(StatId.PROJECTILE_SPEED), damage_info)

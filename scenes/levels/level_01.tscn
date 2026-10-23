@@ -74,4 +74,4 @@ size = 20.0
 [node name="Projectiles Root" type="Node3D" parent="." unique_id=2095388487]
 
 [node name="Tower" parent="." unique_id=1079095775 instance=ExtResource("3_2djvx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65396595, 2.3932714)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.136179, 0.65396595, 1.7186608)
