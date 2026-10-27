@@ -12,7 +12,7 @@ var _modifier_tick_elapsed: float = 0.0
 @onready var _model: Node3D = $Model
 @onready var _range_area: Area3D = $RangeArea
 @onready var _range_shape: CollisionShape3D = $RangeArea/CollisionShape3D
-@onready var _projectiles_root: Node3D = $"../Projectiles Root"
+@onready var _projectiles_root: Node3D = get_tree().current_scene.get_node("Projectiles Root")
 
 
 func _ready() -> void:

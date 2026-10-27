@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cw0udg76a0wmr" path="res://scripts/level.gd" id="1_qdh5e"]
 [ext_resource type="Script" uid="uid://uvegd81h83w7" path="res://scripts/core/health.gd" id="2_50wog"]
 [ext_resource type="PackedScene" uid="uid://ci4501adc61vj" path="res://scenes/towers/tower.tscn" id="3_2djvx"]
+[ext_resource type="PackedScene" path="res://scenes/levels/build_slot.tscn" id="4_build_slot"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_445s5"]
 albedo_color = Color(0.5, 0.5, 0.5, 1)
@@ -54,6 +55,36 @@ path_u_distance = 1.0
 path_joined = false
 
 [node name="BuildSlots" type="Node3D" parent="." unique_id=1887118405]
+
+[node name="BuildSlot1" parent="BuildSlots" unique_id=1843373488 instance=ExtResource("4_build_slot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7543416, 0.3189276, -10.111646)
+
+[node name="BuildSlot2" parent="BuildSlots" unique_id=608380669 instance=ExtResource("4_build_slot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.05, -7)
+
+[node name="BuildSlot3" parent="BuildSlots" unique_id=559473116 instance=ExtResource("4_build_slot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.633541, 0.05, -7.153263)
+
+[node name="BuildSlot4" parent="BuildSlots" unique_id=254802345 instance=ExtResource("4_build_slot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5431776, 0.05, -2.7156935)
+
+[node name="BuildSlot5" parent="BuildSlots" unique_id=413689673 instance=ExtResource("4_build_slot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.05, -1.6084776)
+
+[node name="BuildSlot6" parent="BuildSlots" unique_id=467366087 instance=ExtResource("4_build_slot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6656933, 0.05, 2.3235908)
+
+[node name="BuildSlot7" parent="BuildSlots" unique_id=1189898145 instance=ExtResource("4_build_slot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.003197, 0.05, 3)
+
+[node name="BuildSlot8" parent="BuildSlots" unique_id=1890383063 instance=ExtResource("4_build_slot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.05, 7.0146904)
+
+[node name="BuildSlot9" parent="BuildSlots" unique_id=885532009 instance=ExtResource("4_build_slot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.05, 8)
+
+[node name="BuildSlot10" parent="BuildSlots" unique_id=3437763 instance=ExtResource("4_build_slot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4496226, 0.05, 9.469931)
 
 [node name="Base" type="Node3D" parent="." unique_id=1659158335]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7810383, 0.5, 11.108313)
