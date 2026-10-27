@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://uvegd81h83w7" path="res://scripts/core/health.gd" id="2_50wog"]
 [ext_resource type="PackedScene" uid="uid://ci4501adc61vj" path="res://scenes/towers/tower.tscn" id="3_2djvx"]
 [ext_resource type="PackedScene" path="res://scenes/levels/build_slot.tscn" id="4_build_slot"]
+[ext_resource type="Script" path="res://scripts/build_controller.gd" id="5_build_controller"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_445s5"]
 albedo_color = Color(0.5, 0.5, 0.5, 1)
@@ -55,6 +56,20 @@ path_u_distance = 1.0
 path_joined = false
 
 [node name="BuildSlots" type="Node3D" parent="." unique_id=1887118405]
+
+[node name="BuildController" type="Node" parent="."]
+script = ExtResource("5_build_controller")
+
+[node name="TestUI" type="CanvasLayer" parent="."]
+
+[node name="TestButton" type="Button" parent="TestUI"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 176.0
+offset_bottom = 56.0
+text = "Botón de prueba"
+
+[connection signal="slot_selected" from="BuildController" to="BuildController" method="_on_slot_selected"]
 
 [node name="BuildSlot1" parent="BuildSlots" unique_id=1843373488 instance=ExtResource("4_build_slot")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7543416, 0.3189276, -10.111646)
